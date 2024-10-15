@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from "@/components/Header/NavBar";
 
 export const metadata: Metadata = {
   title: "Smart Shopper - AI Shopping Assistant",
@@ -12,10 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
+      <html lang="en">
+        <body className="bg-dark">
+          <NavBar />
+          {children}
+        </body>
+      </html>
   );
 }
