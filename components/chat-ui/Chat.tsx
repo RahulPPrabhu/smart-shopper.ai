@@ -1,26 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import { Menu, Upload, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 const ChatbotUI = () => {
     const [message, setMessage] = useState('');
 
     return (
         <div className="container-fluid bg-dark text-light min-vh-100 d-flex flex-column">
-            <nav className="navbar navbar-dark bg-dark">
-                <div className="container-fluid">
-                    <button className="navbar-toggler" type="button">
-                        <Menu size={24} />
-                    </button>
-                    <span className="navbar-brand mb-0 h1">SmartShopper.ai</span>
-                    <div>
-                        <button className="btn btn-outline-light me-2">Sign in</button>
-                        <button className="btn btn-outline-light">Sign up</button>
-                    </div>
-                </div>
-            </nav>
-
             <div className="flex-grow-1 d-flex flex-column justify-content-center">
                 <div className="container mb-4">
                     <div className="text-light mb-3">
