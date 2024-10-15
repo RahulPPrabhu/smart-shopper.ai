@@ -15,8 +15,8 @@ const ChatbotUI = () => {
                     </button>
                     <span className="navbar-brand mb-0 h1">SmartShopper.ai</span>
                     <div>
-                        <button className="btn btn-outline-light me-2">Login</button>
-                        <button className="btn btn-outline-light">Register</button>
+                        <button className="btn btn-outline-light me-2">Sign in</button>
+                        <button className="btn btn-outline-light">Sign up</button>
                     </div>
                 </div>
             </nav>
