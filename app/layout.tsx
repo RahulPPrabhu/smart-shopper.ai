@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../public/styles/Custom.scss';
+import { Toaster } from 'sonner';
 import NavBar from "@/components/Header/NavBar";
 
 export const metadata: Metadata = {
@@ -17,6 +19,7 @@ export default function RootLayout({
         <body className="bg-dark">
           <NavBar />
           {children}
+          <Toaster />
         </body>
       </html>
   );
