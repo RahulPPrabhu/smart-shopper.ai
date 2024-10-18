@@ -6,6 +6,7 @@ export async function generateGeminiText(prompt: string) {
     const { text } = await generateText({
       model: google('gemini-1.5-flash'),
       prompt: prompt,
+      temperature: 2.0,
     });
     return text;
   } catch (error) {

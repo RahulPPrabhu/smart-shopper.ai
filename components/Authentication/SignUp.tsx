@@ -3,17 +3,46 @@
 import { FormEvent, useState } from 'react';
 import { User, Mail, Lock, UserPlus } from 'lucide-react';
 import Link from 'next/link';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const SignUpComponent = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Handle sign-up logic here
-    console.log('Sign up attempted with:', { name, email, password, confirmPassword });
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/signup`, {
+      method: 'POST',
+      cache: 'no-store',
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    if (data) {
+      toast.success('Signed up successfully');
+      router.push('/');
+    } else {
+      toast.error('Failed to sign up');
+    }
+    console.log('Sign up attempted with:', formData);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
   };
 
   return (
@@ -31,8 +60,8 @@ const SignUpComponent = () => {
                 type="text"
                 className="form-control"
                 id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={formData.name}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -45,8 +74,8 @@ const SignUpComponent = () => {
                 type="email"
                 className="form-control"
                 id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -59,8 +88,8 @@ const SignUpComponent = () => {
                 type="password"
                 className="form-control"
                 id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
             </div>
@@ -73,8 +102,8 @@ const SignUpComponent = () => {
                 type="password"
                 className="form-control"
                 id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={formData.confirmPassword}
+                onChange={handleChange}
                 required
               />
             </div>

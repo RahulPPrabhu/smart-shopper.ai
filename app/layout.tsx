@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/styles/Custom.scss';
 import { Toaster } from 'sonner';
 import NavBar from "@/components/Header/NavBar";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Smart Shopper - AI Shopping Assistant",
@@ -14,10 +15,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const cookie = cookies().get('token');
   return (
       <html lang="en">
         <body className="bg-dark">
-          <NavBar />
+          <NavBar cookie={cookie} />
           {children}
           <Toaster />
         </body>

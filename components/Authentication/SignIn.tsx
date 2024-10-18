@@ -2,14 +2,29 @@
 
 import { FormEvent, useState } from 'react';
 import { User, Lock, LogIn } from 'lucide-react';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const SignInComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Handle sign-in logic here
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/signin`, {
+      method: 'POST',
+      cache: 'no-store',
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (data) {
+      toast.success('Signed in successfully');
+      router.push('/');
+    } else {
+      toast.error('Failed to sign in');
+    }
     console.log('Sign in attempted with:', { email, password });
   };
 

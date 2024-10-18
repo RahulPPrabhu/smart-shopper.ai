@@ -11,16 +11,22 @@
   "dependencies": {
     "@ai-sdk/google": "^0.0.52",
     "ai": "^3.4.13",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.3",
+    "jose": "^5.9.4",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.453.0",
     "mongoose": "^8.7.1",
     "next": "14.2.15",
+    "next-client-cookies": "^1.1.1",
     "react": "^18",
     "react-dom": "^18",
     "sass": "^1.80.1",
     "sonner": "^1.5.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

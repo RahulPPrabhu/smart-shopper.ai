@@ -4,8 +4,18 @@ import { toast } from "sonner";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
 
-    const handleClick = () => {
-        toast.success("Product added to cart");
+    const handleClick = async () => {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/Cart`, {
+            method: 'POST',
+            cache: 'no-store',
+            body: JSON.stringify(product)
+        });
+        const data = await res.json();
+        if (data) {
+            toast.success("Product added to cart");
+        } else {
+            toast.error("Failed to add product to cart");
+        }
     }
 
     return (
